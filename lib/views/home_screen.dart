@@ -12,712 +12,907 @@ class HomeScreen extends StatelessWidget {
       child: Consumer<HomeViewModel>(
         builder: (context, viewModel, _) {
           return Scaffold(
-            backgroundColor: Colors.grey[50],
-            body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Logo
-                          Row(
+            body: Stack(
+              children: [
+                // Tam boyutlu arka plan görseli
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/bg-home/image.png'),
+                      fit: BoxFit.cover,
+                      opacity: 0.3, // Çok soft olması için düşük opacity
+                    ),
+                  ),
+                ),
+                
+                // Ana içerik
+                SafeArea(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'NFC',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              const Text(
-                                'Goo',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF78BE20),
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(left: 4),
-                                width: 8,
-                                height: 8,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFF78BE20),
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 40),
-                          
-                          // Hoş geldin mesajı
-                          const Text(
-                            'Merhaba, Doğukan!',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          
-                          // Ana başlık
-                          RichText(
-                            text: const TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Everything',
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF78BE20),
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: ' in one link.',
-                                  style: TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 30),
-                          
-                          // Arama kutusu
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  child: Text(
-                                    'Kişi ara...',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.search,
-                                  color: Colors.grey[400],
-                                  size: 24,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 40),
-                          
-                          // Merkezi profil avatarı
-                          Center(
-                            child: Container(
-                              width: 200,
-                              height: 200,
-                              child: Stack(
+                              // Logo
+                              Row(
                                 children: [
-                                  // Ana profil
-                                  Center(
-                                    child: Container(
-                                      width: 120,
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white, width: 4),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.1),
-                                            blurRadius: 10,
-                                            offset: const Offset(0, 4),
-                                          ),
-                                        ],
-                                      ),
-                                      child: const CircleAvatar(
-                                        radius: 58,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/120'),
-                                      ),
+                                  const Text(
+                                    'NFC',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
                                     ),
                                   ),
-                                  
-                                  // Üst avatar
-                                  Positioned(
-                                    top: 0,
-                                    left: 75,
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white, width: 3),
-                                      ),
-                                      child: const CircleAvatar(
-                                        radius: 22,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/50'),
-                                      ),
+                                  const Text(
+                                    'Goo',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF78BE20),
                                     ),
                                   ),
-                                  
-                                  // Sol avatar
-                                  Positioned(
-                                    left: 0,
-                                    top: 110,
-                                    child: Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white, width: 3),
-                                      ),
-                                      child: const CircleAvatar(
-                                        radius: 20,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/45'),
-                                      ),
-                                    ),
-                                  ),
-                                  
-                                  // Sağ avatar
-                                  Positioned(
-                                    right: 0,
-                                    bottom: 50,
-                                    child: Container(
-                                      width: 45,
-                                      height: 45,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white, width: 3),
-                                      ),
-                                      child: const CircleAvatar(
-                                        radius: 20,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/45'),
-                                      ),
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 4),
+                                    width: 6,
+                                    height: 6,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFF78BE20),
+                                      shape: BoxShape.circle,
                                     ),
                                   ),
                                 ],
                               ),
-                            ),
-                          ),
-                          const SizedBox(height: 40),
-                          
-                          // Profil Ziyaretlerim
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                              const SizedBox(height: 24),
+                              
+                              // Hoş geldin mesajı
                               const Text(
-                                'Profil Ziyaretlerim',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              Text(
-                                'Tamamını Gör',
+                                'Merhaba, Doğukan!',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: Colors.grey[600],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          
-                          Row(
-                            children: [
-                              // Avatar'lar
-                              SizedBox(
-                                width: 140,
-                                child: Stack(
-                                  children: [
-                                    const CircleAvatar(
-                                      radius: 16,
-                                      backgroundImage: NetworkImage('https://via.placeholder.com/32'),
-                                    ),
-                                    Positioned(
-                                      left: 24,
-                                      child: const CircleAvatar(
-                                        radius: 16,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/32'),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 48,
-                                      child: const CircleAvatar(
-                                        radius: 16,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/32'),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 72,
-                                      child: const CircleAvatar(
-                                        radius: 16,
-                                        backgroundImage: NetworkImage('https://via.placeholder.com/32'),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              const Text(
-                                '+ 13 kişi daha',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Color(0xFF78BE20),
+                                  color: Colors.grey,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(height: 40),
-                          
-                          // Kartlarım
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                              const SizedBox(height: 6),
+                              
+                              // Ana başlık
+                              RichText(
+                                text: const TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Everything',
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF78BE20),
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ' in one link.',
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              
+                              // Arama kutusu
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.05),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                      child: Text(
+                                        'Kişi ara...',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.search,
+                                      color: Colors.grey[400],
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              
+                              // Merkezi profil avatarı
+                              Center(
+                                child: Container(
+                                  width: 200,
+                                  height: 200,
+                                  child: Stack(
+                                    children: [
+                                      // Büyük arka plan çemberi
+                                      Center(
+                                        child: Container(
+                                          width: 180,
+                                          height: 180,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Colors.grey[100],
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.05),
+                                                blurRadius: 15,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                      // Ana profil (merkez)
+                                      Center(
+                                        child: Container(
+                                          width: 80,
+                                          height: 80,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: Colors.white, width: 3),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.1),
+                                                blurRadius: 8,
+                                                offset: const Offset(0, 3),
+                                              ),
+                                            ],
+                                          ),
+                                          child: CircleAvatar(
+                                            radius: 38,
+                                            backgroundColor: const Color(0xFF78BE20),
+                                            child: const Text(
+                                              'D',
+                                              style: TextStyle(
+                                                fontSize: 32,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                      // 1. Kullanıcı (Üst - 12 o'clock)
+                                      Positioned(
+                                        top: 15,
+                                        left: 85,
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: Colors.white, width: 2),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.1),
+                                                blurRadius: 4,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: CircleAvatar(
+                                            radius: 16,
+                                            backgroundColor: Colors.orange,
+                                            child: const Text(
+                                              'A',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                      // 2. Kullanıcı (Sol alt - 8 o'clock)
+                                      Positioned(
+                                        bottom: 35,
+                                        left: 30,
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: Colors.white, width: 2),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.1),
+                                                blurRadius: 4,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: CircleAvatar(
+                                            radius: 16,
+                                            backgroundColor: Colors.blue,
+                                            child: const Text(
+                                              'M',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                      // 3. Kullanıcı (Sağ alt - 4 o'clock)
+                                      Positioned(
+                                        bottom: 35,
+                                        right: 30,
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: Colors.white, width: 2),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.1),
+                                                blurRadius: 4,
+                                                offset: const Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: CircleAvatar(
+                                            radius: 16,
+                                            backgroundColor: Colors.purple,
+                                            child: const Text(
+                                              'E',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              
+                              // Profil Ziyaretlerim
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Profil Ziyaretlerim',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Tamamını Gör',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              
+                              Row(
+                                children: [
+                                  // Avatar'lar
+                                  SizedBox(
+                                    width: 100,
+                                    child: Stack(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 12,
+                                          backgroundColor: Colors.red,
+                                          child: const Text('A', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                        ),
+                                        Positioned(
+                                          left: 18,
+                                          child: CircleAvatar(
+                                            radius: 12,
+                                            backgroundColor: Colors.green,
+                                            child: const Text('B', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: 36,
+                                          child: CircleAvatar(
+                                            radius: 12,
+                                            backgroundColor: Colors.blue,
+                                            child: const Text('C', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: 54,
+                                          child: CircleAvatar(
+                                            radius: 12,
+                                            backgroundColor: Colors.purple,
+                                            child: const Text('D', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    '+ 13 kişi daha',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xFF78BE20),
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 24),
+                              
+                              // Kartlarım
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    'Kartlarım',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Tamamını Gör',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              
+                              // Kartlar grid
+                              GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 12,
+                                mainAxisSpacing: 12,
+                                childAspectRatio: 1.6,
+                                children: [
+                                  // İş Kartım
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.orange.withOpacity(0.3),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        // Ana kişi avatarı
+                                        Positioned(
+                                          top: 30,
+                                          left: 12,
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundColor: Colors.white.withOpacity(0.9),
+                                            child: CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: const Color(0xFF2196F3),
+                                              child: const Icon(
+                                                Icons.person,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        // Yeşil durum noktası
+                                        Positioned(
+                                          top: 6,
+                                          right: 6,
+                                          child: Container(
+                                            width: 8,
+                                            height: 8,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFF78BE20),
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        const Positioned(
+                                          bottom: 12,
+                                          left: 12,
+                                          child: Text(
+                                            'İş Kartım',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 8,
+                                          right: 8,
+                                          child: SizedBox(
+                                            width: 45,
+                                            child: Stack(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 7,
+                                                  backgroundColor: Colors.white.withOpacity(0.8),
+                                                  child: const Icon(Icons.person, size: 8, color: Colors.orange),
+                                                ),
+                                                Positioned(
+                                                  left: 9,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.work, size: 8, color: Colors.orange),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 18,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.business, size: 8, color: Colors.orange),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  
+                                  // Web Developer
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [Color(0xFFE91E63), Color(0xFFF8BBD9)],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.pink.withOpacity(0.3),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        // Ana kişi avatarı
+                                        Positioned(
+                                          top: 30,
+                                          right: 12,
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundColor: Colors.white.withOpacity(0.9),
+                                            child: CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: const Color(0xFFE91E63),
+                                              child: const Icon(
+                                                Icons.woman,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        // Yeşil durum noktası
+                                        Positioned(
+                                          top: 6,
+                                          right: 6,
+                                          child: Container(
+                                            width: 8,
+                                            height: 8,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFF78BE20),
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        const Positioned(
+                                          bottom: 12,
+                                          left: 12,
+                                          child: Text(
+                                            'Web Developer',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 8,
+                                          right: 8,
+                                          child: SizedBox(
+                                            width: 45,
+                                            child: Stack(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 7,
+                                                  backgroundColor: Colors.white.withOpacity(0.8),
+                                                  child: const Icon(Icons.code, size: 8, color: Colors.pink),
+                                                ),
+                                                Positioned(
+                                                  left: 9,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.web, size: 8, color: Colors.pink),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 18,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.laptop, size: 8, color: Colors.pink),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  
+                                  // Drone Pilot
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.blue.withOpacity(0.3),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        // Drone/teknoloji görseli
+                                        Positioned(
+                                          top: 15,
+                                          left: 0,
+                                          right: 0,
+                                          child: Container(
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white.withOpacity(0.1),
+                                              borderRadius: BorderRadius.circular(6),
+                                            ),
+                                            child: const Icon(
+                                              Icons.flight,
+                                              color: Colors.white,
+                                              size: 28,
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        // Yeşil durum noktası
+                                        Positioned(
+                                          top: 6,
+                                          right: 6,
+                                          child: Container(
+                                            width: 8,
+                                            height: 8,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFF78BE20),
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        const Positioned(
+                                          bottom: 12,
+                                          left: 12,
+                                          child: Text(
+                                            'Drone Pilot',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 8,
+                                          right: 8,
+                                          child: SizedBox(
+                                            width: 45,
+                                            child: Stack(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 7,
+                                                  backgroundColor: Colors.white.withOpacity(0.8),
+                                                  child: const Icon(Icons.flight, size: 8, color: Colors.blue),
+                                                ),
+                                                Positioned(
+                                                  left: 9,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.camera_alt, size: 8, color: Colors.blue),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 18,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.videocam, size: 8, color: Colors.blue),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  
+                                  // İş Kartım 4
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [Color(0xFF4CAF50), Color(0xFF81C784)],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.green.withOpacity(0.3),
+                                          blurRadius: 6,
+                                          offset: const Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        // Ana kişi avatarı
+                                        Positioned(
+                                          top: 30,
+                                          right: 12,
+                                          child: CircleAvatar(
+                                            radius: 20,
+                                            backgroundColor: Colors.white.withOpacity(0.9),
+                                            child: CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: const Color(0xFF4CAF50),
+                                              child: const Icon(
+                                                Icons.woman,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        // Yeşil durum noktası
+                                        Positioned(
+                                          top: 6,
+                                          right: 6,
+                                          child: Container(
+                                            width: 8,
+                                            height: 8,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFF78BE20),
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                        ),
+                                        
+                                        const Positioned(
+                                          bottom: 12,
+                                          left: 12,
+                                          child: Text(
+                                            'İş Kartım 4',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 8,
+                                          right: 8,
+                                          child: SizedBox(
+                                            width: 45,
+                                            child: Stack(
+                                              children: [
+                                                CircleAvatar(
+                                                  radius: 7,
+                                                  backgroundColor: Colors.white.withOpacity(0.8),
+                                                  child: const Icon(Icons.phone, size: 8, color: Colors.green),
+                                                ),
+                                                Positioned(
+                                                  left: 9,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.email, size: 8, color: Colors.green),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  left: 18,
+                                                  child: CircleAvatar(
+                                                    radius: 7,
+                                                    backgroundColor: Colors.white.withOpacity(0.8),
+                                                    child: const Icon(Icons.location_on, size: 8, color: Colors.green),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 24),
+                              
                               const Text(
-                                'Kartlarım',
+                                'ETİKETLERİM',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.black87,
+                                  color: Colors.black54,
+                                  letterSpacing: 1.2,
                                 ),
                               ),
-                              Text(
-                                'Tamamını Gör',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey[600],
-                                ),
+                              const SizedBox(height: 16),
+                              
+                              // Kategori avatarları
+                              GridView.count(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 16,
+                                children: [
+                                  _buildCategoryItem('Analizlenim', Colors.pink, Icons.analytics),
+                                  _buildCategoryItem('Kedim', Colors.indigo, Icons.pets),
+                                  _buildCategoryItem('Aracım', Colors.blue, Icons.car_rental),
+                                  _buildCategoryItem('Bilgisayarım', Colors.grey, Icons.computer),
+                                  _buildCategoryItem('Analizlenim', Colors.pink, Icons.analytics),
+                                  _buildCategoryItem('Kedim', Colors.indigo, Icons.pets),
+                                  _buildCategoryItem('Aracım', Colors.blue, Icons.car_rental),
+                                  _buildCategoryItem('Bilgisayarım', Colors.grey, Icons.computer),
+                                ],
                               ),
+                              const SizedBox(height: 80),
                             ],
                           ),
-                          const SizedBox(height: 16),
-                          
-                          // Kartlar grid
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 1.4,
-                            children: [
-                              // İş Kartım
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.orange.withOpacity(0.3),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      top: 16,
-                                      left: 16,
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: const Icon(
-                                          Icons.work,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                      ),
-                                    ),
-                                    const Positioned(
-                                      bottom: 16,
-                                      left: 16,
-                                      child: Text(
-                                        'İş Kartım',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 12,
-                                      right: 12,
-                                      child: SizedBox(
-                                        width: 60,
-                                        child: Stack(
-                                          children: [
-                                            const CircleAvatar(
-                                              radius: 10,
-                                              backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                            ),
-                                            Positioned(
-                                              left: 12,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              left: 24,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              
-                              // Web Developer
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [Color(0xFFE91E63), Color(0xFFF8BBD9)],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.pink.withOpacity(0.3),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      top: 16,
-                                      left: 16,
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: const Icon(
-                                          Icons.code,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                      ),
-                                    ),
-                                    const Positioned(
-                                      bottom: 16,
-                                      left: 16,
-                                      child: Text(
-                                        'Web Developer',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 12,
-                                      right: 12,
-                                      child: SizedBox(
-                                        width: 60,
-                                        child: Stack(
-                                          children: [
-                                            const CircleAvatar(
-                                              radius: 10,
-                                              backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                            ),
-                                            Positioned(
-                                              left: 12,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              left: 24,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              
-                              // Drone Pilot
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.blue.withOpacity(0.3),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      top: 16,
-                                      left: 16,
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: const Icon(
-                                          Icons.flight,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                      ),
-                                    ),
-                                    const Positioned(
-                                      bottom: 16,
-                                      left: 16,
-                                      child: Text(
-                                        'Drone Pilot',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 12,
-                                      right: 12,
-                                      child: SizedBox(
-                                        width: 60,
-                                        child: Stack(
-                                          children: [
-                                            const CircleAvatar(
-                                              radius: 10,
-                                              backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                            ),
-                                            Positioned(
-                                              left: 12,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              left: 24,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              
-                              // İş Kartım 4
-                              Container(
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [Color(0xFF4CAF50), Color(0xFF81C784)],
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                  ),
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.green.withOpacity(0.3),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                      top: 16,
-                                      left: 16,
-                                      child: Container(
-                                        width: 40,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.2),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: const Icon(
-                                          Icons.phone,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                      ),
-                                    ),
-                                    const Positioned(
-                                      bottom: 16,
-                                      left: 16,
-                                      child: Text(
-                                        'İş Kartım 4',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      bottom: 12,
-                                      right: 12,
-                                      child: SizedBox(
-                                        width: 60,
-                                        child: Stack(
-                                          children: [
-                                            const CircleAvatar(
-                                              radius: 10,
-                                              backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                            ),
-                                            Positioned(
-                                              left: 12,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                            Positioned(
-                                              left: 24,
-                                              child: const CircleAvatar(
-                                                radius: 10,
-                                                backgroundImage: NetworkImage('https://via.placeholder.com/20'),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 40),
-                          
-                          // PAYLAŞABACAĞIM
-                          const Text(
-                            'PAYLAŞABACAĞIM',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black54,
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          
-                          // Kategori avatarları
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            children: [
-                              _buildCategoryItem('Analizlenim', Colors.pink, Icons.analytics),
-                              _buildCategoryItem('Kedim', Colors.indigo, Icons.pets),
-                              _buildCategoryItem('Aracım', Colors.blue, Icons.car_rental),
-                              _buildCategoryItem('Bilgisayarım', Colors.grey, Icons.computer),
-                              _buildCategoryItem('Analizlenim', Colors.pink, Icons.analytics),
-                              _buildCategoryItem('Kedim', Colors.indigo, Icons.pets),
-                              _buildCategoryItem('Aracım', Colors.blue, Icons.car_rental),
-                              _buildCategoryItem('Bilgisayarım', Colors.grey, Icons.computer),
-                            ],
-                          ),
-                          const SizedBox(height: 100),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                  
-                  // Alt navigasyon bar
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 10,
-                          offset: const Offset(0, -2),
+                      
+                      // Alt navigasyon bar
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 8,
+                              offset: const Offset(0, -2),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        _buildNavItem(Icons.home, true),
-                        _buildNavItem(Icons.credit_card, false),
-                        _buildNavItem(Icons.person, false),
-                        _buildNavItem(Icons.chat_bubble_outline, false),
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF78BE20),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.add,
-                            color: Colors.white,
-                            size: 24,
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _buildNavItem(Icons.home, true),
+                            _buildNavItem(Icons.credit_card, false),
+                            _buildNavItem(Icons.person, false),
+                            // Mesaj ikonu badge ile
+                            Stack(
+                              children: [
+                                _buildNavItem(Icons.chat_bubble_outline, false),
+                                Positioned(
+                                  top: 0,
+                                  right: 0,
+                                  child: Container(
+                                    width: 14,
+                                    height: 14,
+                                    decoration: const BoxDecoration(
+                                      color: Color(0xFF78BE20),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        '1',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 32,
+                              height: 32,
+                              decoration: const BoxDecoration(
+                                color: Color(0xFF78BE20),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         },
@@ -729,16 +924,16 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 60,
-          height: 60,
+          width: 45,
+          height: 45,
           decoration: BoxDecoration(
             color: color,
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
                 color: color.withOpacity(0.3),
-                blurRadius: 8,
-                offset: const Offset(0, 4),
+                blurRadius: 6,
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -748,15 +943,15 @@ class HomeScreen extends StatelessWidget {
                 child: Icon(
                   icon,
                   color: Colors.white,
-                  size: 28,
+                  size: 20,
                 ),
               ),
               Positioned(
-                top: 4,
-                right: 4,
+                top: 3,
+                right: 3,
                 child: Container(
-                  width: 12,
-                  height: 12,
+                  width: 8,
+                  height: 8,
                   decoration: const BoxDecoration(
                     color: Color(0xFF78BE20),
                     shape: BoxShape.circle,
@@ -766,11 +961,11 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6),
         Text(
           title,
           style: const TextStyle(
-            fontSize: 12,
+            fontSize: 10,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
           ),
@@ -784,11 +979,11 @@ class HomeScreen extends StatelessWidget {
   
   Widget _buildNavItem(IconData icon, bool isSelected) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8),
       child: Icon(
         icon,
         color: isSelected ? const Color(0xFF78BE20) : Colors.grey,
-        size: 24,
+        size: 20,
       ),
     );
   }
