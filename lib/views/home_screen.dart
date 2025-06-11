@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 import 'package:provider/provider.dart';
 import '../viewmodels/home_viewmodel.dart';
 import '../widgets/bottom_navigation_widget.dart';
@@ -145,158 +146,88 @@ class HomeScreen extends StatelessWidget {
                               
                               // Merkezi profil avatarı
                               Center(
-                                child: Container(
+                                child: SizedBox(
                                   width: 200,
                                   height: 200,
                                   child: Stack(
+                                    alignment: Alignment.center,
                                     children: [
-                                      // Büyük arka plan çemberi
-                                      Center(
+                                      // Dış çember
+                                      Container(
+                                        width: 180,
+                                        height: 180,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: Colors.grey.shade300, width: 1.0),
+                                        ),
+                                      ),
+                                      // İç çember
+                                      Container(
+                                        width: 110,
+                                        height: 110,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(color: Colors.grey.shade300, width: 1.0),
+                                        ),
+                                      ),
+                              
+                                      // Parlama efekti
+                                      Positioned(
+                                        bottom: 30,
                                         child: Container(
-                                          width: 180,
-                                          height: 180,
+                                          width: 70,
+                                          height: 70,
                                           decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.grey[100],
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.05),
-                                                blurRadius: 15,
-                                                offset: const Offset(0, 3),
-                                              ),
-                                            ],
+                                            gradient: RadialGradient(
+                                              colors: [
+                                                Colors.white.withOpacity(0.7),
+                                                Colors.white.withOpacity(0.0),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                      
+                              
                                       // Ana profil (merkez)
-                                      Center(
-                                        child: Container(
-                                          width: 80,
-                                          height: 80,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.white, width: 3),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.1),
-                                                blurRadius: 8,
-                                                offset: const Offset(0, 3),
-                                              ),
-                                            ],
-                                          ),
-                                          child: CircleAvatar(
-                                            radius: 38,
-                                            backgroundColor: const Color(0xFF78BE20),
-                                            child: const Text(
-                                              'D',
-                                              style: TextStyle(
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
+                                      Container(
+                                        width: 60,
+                                        height: 60,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 10,
+                                              spreadRadius: 2,
                                             ),
+                                          ],
+                                        ),
+                                        child: ClipOval(
+                                          child: Image.asset(
+                                            'assets/kartlar/iskartim.png',
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
-                                      
-                                      // 1. Kullanıcı (Üst - 12 o'clock)
-                                      Positioned(
-                                        top: 15,
-                                        left: 85,
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.white, width: 2),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.1),
-                                                blurRadius: 4,
-                                                offset: const Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: CircleAvatar(
-                                            radius: 16,
-                                            backgroundColor: Colors.orange,
-                                            child: const Text(
-                                              'A',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                              
+                                      _buildPositionedAvatar(
+                                        'assets/kartlar/webdev.png',
+                                        size: 30,
+                                        angle: 35,
+                                        distance: 85,
                                       ),
-                                      
-                                      // 2. Kullanıcı (Sol alt - 8 o'clock)
-                                      Positioned(
-                                        bottom: 35,
-                                        left: 30,
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.white, width: 2),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.1),
-                                                blurRadius: 4,
-                                                offset: const Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: CircleAvatar(
-                                            radius: 16,
-                                            backgroundColor: Colors.blue,
-                                            child: const Text(
-                                              'M',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                      _buildPositionedAvatar(
+                                        'assets/kartlar/dronepilot.png',
+                                        size: 30,
+                                        angle: 155,
+                                        distance: 85,
                                       ),
-                                      
-                                      // 3. Kullanıcı (Sağ alt - 4 o'clock)
-                                      Positioned(
-                                        bottom: 35,
-                                        right: 30,
-                                        child: Container(
-                                          width: 36,
-                                          height: 36,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.white, width: 2),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.1),
-                                                blurRadius: 4,
-                                                offset: const Offset(0, 2),
-                                              ),
-                                            ],
-                                          ),
-                                          child: CircleAvatar(
-                                            radius: 16,
-                                            backgroundColor: Colors.purple,
-                                            child: const Text(
-                                              'E',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                      _buildPositionedAvatar(
+                                        'assets/kartlar/iskartim4.png',
+                                        size: 30,
+                                        angle: 295,
+                                        distance: 85,
+                                        isBW: true,
                                       ),
                                     ],
                                   ),
@@ -331,42 +262,77 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                   // Avatar'lar
                                   SizedBox(
-                                    width: 100,
+                                    width: 80,
                                     child: Stack(
                                       children: [
-                                        CircleAvatar(
-                                          radius: 12,
-                                          backgroundColor: Colors.red,
-                                          child: const Text('A', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                        Container(
+                                          width: 24,
+                                          height: 24,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(color: Colors.white, width: 2),
+                                          ),
+                                          child: ClipOval(
+                                            child: Image.asset(
+                                              'assets/kartlar/iskartim.png',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
                                         Positioned(
-                                          left: 18,
-                                          child: CircleAvatar(
-                                            radius: 12,
-                                            backgroundColor: Colors.green,
-                                            child: const Text('B', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                          left: 12,
+                                          child: Container(
+                                            width: 24,
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(color: Colors.white, width: 2),
+                                            ),
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                'assets/kartlar/webdev.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: 24,
+                                          child: Container(
+                                            width: 24,
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(color: Colors.white, width: 2),
+                                            ),
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                'assets/kartlar/dronepilot.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         Positioned(
                                           left: 36,
-                                          child: CircleAvatar(
-                                            radius: 12,
-                                            backgroundColor: Colors.blue,
-                                            child: const Text('C', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          left: 54,
-                                          child: CircleAvatar(
-                                            radius: 12,
-                                            backgroundColor: Colors.purple,
-                                            child: const Text('D', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 10)),
+                                          child: Container(
+                                            width: 24,
+                                            height: 24,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(color: Colors.white, width: 2),
+                                            ),
+                                            child: ClipOval(
+                                              child: Image.asset(
+                                                'assets/kartlar/iskartim4.png',
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
                                   const Text(
                                     '+ 13 kişi daha',
                                     style: TextStyle(
@@ -409,406 +375,27 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 12,
                                 mainAxisSpacing: 12,
-                                childAspectRatio: 1.6,
+                                childAspectRatio: 1.3,
                                 children: [
-                                  // İş Kartım
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [Color(0xFFFF9800), Color(0xFFFFB74D)],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.orange.withOpacity(0.3),
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        // Ana kişi avatarı
-                                        Positioned(
-                                          top: 30,
-                                          left: 12,
-                                          child: CircleAvatar(
-                                            radius: 20,
-                                            backgroundColor: Colors.white.withOpacity(0.9),
-                                            child: CircleAvatar(
-                                              radius: 18,
-                                              backgroundColor: const Color(0xFF2196F3),
-                                              child: const Icon(
-                                                Icons.person,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        // Yeşil durum noktası
-                                        Positioned(
-                                          top: 6,
-                                          right: 6,
-                                          child: Container(
-                                            width: 8,
-                                            height: 8,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFF78BE20),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        const Positioned(
-                                          bottom: 12,
-                                          left: 12,
-                                          child: Text(
-                                            'İş Kartım',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 8,
-                                          right: 8,
-                                          child: SizedBox(
-                                            width: 45,
-                                            child: Stack(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 7,
-                                                  backgroundColor: Colors.white.withOpacity(0.8),
-                                                  child: const Icon(Icons.person, size: 8, color: Colors.orange),
-                                                ),
-                                                Positioned(
-                                                  left: 9,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.work, size: 8, color: Colors.orange),
-                                                  ),
-                                                ),
-                                                Positioned(
-                                                  left: 18,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.business, size: 8, color: Colors.orange),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  _buildCard(
+                                    title: 'İş Kartım',
+                                    imagePath: 'assets/kartlar/iskartim.png',
+                                    isOnline: true,
                                   ),
-                                  
-                                  // Web Developer
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [Color(0xFFE91E63), Color(0xFFF8BBD9)],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.pink.withOpacity(0.3),
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        // Ana kişi avatarı
-                                        Positioned(
-                                          top: 30,
-                                          right: 12,
-                                          child: CircleAvatar(
-                                            radius: 20,
-                                            backgroundColor: Colors.white.withOpacity(0.9),
-                                            child: CircleAvatar(
-                                              radius: 18,
-                                              backgroundColor: const Color(0xFFE91E63),
-                                              child: const Icon(
-                                                Icons.woman,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        // Yeşil durum noktası
-                                        Positioned(
-                                          top: 6,
-                                          right: 6,
-                                          child: Container(
-                                            width: 8,
-                                            height: 8,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFF78BE20),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        const Positioned(
-                                          bottom: 12,
-                                          left: 12,
-                                          child: Text(
-                                            'Web Developer',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 8,
-                                          right: 8,
-                                          child: SizedBox(
-                                            width: 45,
-                                            child: Stack(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 7,
-                                                  backgroundColor: Colors.white.withOpacity(0.8),
-                                                  child: const Icon(Icons.code, size: 8, color: Colors.pink),
-                                                ),
-                                                Positioned(
-                                                  left: 9,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.web, size: 8, color: Colors.pink),
-                                                  ),
-                                                ),
-                                                Positioned(
-                                                  left: 18,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.laptop, size: 8, color: Colors.pink),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  _buildCard(
+                                    title: 'Web Developer',
+                                    imagePath: 'assets/kartlar/webdev.png',
+                                    isOnline: false,
                                   ),
-                                  
-                                  // Drone Pilot
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [Color(0xFF2196F3), Color(0xFF64B5F6)],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.blue.withOpacity(0.3),
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        // Drone/teknoloji görseli
-                                        Positioned(
-                                          top: 15,
-                                          left: 0,
-                                          right: 0,
-                                          child: Container(
-                                            height: 40,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white.withOpacity(0.1),
-                                              borderRadius: BorderRadius.circular(6),
-                                            ),
-                                            child: const Icon(
-                                              Icons.flight,
-                                              color: Colors.white,
-                                              size: 28,
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        // Yeşil durum noktası
-                                        Positioned(
-                                          top: 6,
-                                          right: 6,
-                                          child: Container(
-                                            width: 8,
-                                            height: 8,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFF78BE20),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        const Positioned(
-                                          bottom: 12,
-                                          left: 12,
-                                          child: Text(
-                                            'Drone Pilot',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 8,
-                                          right: 8,
-                                          child: SizedBox(
-                                            width: 45,
-                                            child: Stack(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 7,
-                                                  backgroundColor: Colors.white.withOpacity(0.8),
-                                                  child: const Icon(Icons.flight, size: 8, color: Colors.blue),
-                                                ),
-                                                Positioned(
-                                                  left: 9,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.camera_alt, size: 8, color: Colors.blue),
-                                                  ),
-                                                ),
-                                                Positioned(
-                                                  left: 18,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.videocam, size: 8, color: Colors.blue),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  _buildCard(
+                                    title: 'Drone Pilot',
+                                    imagePath: 'assets/kartlar/dronepilot.png',
+                                    isOnline: true,
                                   ),
-                                  
-                                  // İş Kartım 4
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(
-                                        colors: [Color(0xFF4CAF50), Color(0xFF81C784)],
-                                        begin: Alignment.topLeft,
-                                        end: Alignment.bottomRight,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.green.withOpacity(0.3),
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        // Ana kişi avatarı
-                                        Positioned(
-                                          top: 30,
-                                          right: 12,
-                                          child: CircleAvatar(
-                                            radius: 20,
-                                            backgroundColor: Colors.white.withOpacity(0.9),
-                                            child: CircleAvatar(
-                                              radius: 18,
-                                              backgroundColor: const Color(0xFF4CAF50),
-                                              child: const Icon(
-                                                Icons.woman,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        // Yeşil durum noktası
-                                        Positioned(
-                                          top: 6,
-                                          right: 6,
-                                          child: Container(
-                                            width: 8,
-                                            height: 8,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xFF78BE20),
-                                              shape: BoxShape.circle,
-                                            ),
-                                          ),
-                                        ),
-                                        
-                                        const Positioned(
-                                          bottom: 12,
-                                          left: 12,
-                                          child: Text(
-                                            'İş Kartım 4',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned(
-                                          bottom: 8,
-                                          right: 8,
-                                          child: SizedBox(
-                                            width: 45,
-                                            child: Stack(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 7,
-                                                  backgroundColor: Colors.white.withOpacity(0.8),
-                                                  child: const Icon(Icons.phone, size: 8, color: Colors.green),
-                                                ),
-                                                Positioned(
-                                                  left: 9,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.email, size: 8, color: Colors.green),
-                                                  ),
-                                                ),
-                                                Positioned(
-                                                  left: 18,
-                                                  child: CircleAvatar(
-                                                    radius: 7,
-                                                    backgroundColor: Colors.white.withOpacity(0.8),
-                                                    child: const Icon(Icons.location_on, size: 8, color: Colors.green),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  _buildCard(
+                                    title: 'İş Kartım 4',
+                                    imagePath: 'assets/kartlar/iskartim4.png',
+                                    isOnline: false,
                                   ),
                                 ],
                               ),
@@ -825,22 +412,23 @@ class HomeScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 16),
                               
-                              // Kategori avatarları
+                              // Etiketler grid
                               GridView.count(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 crossAxisCount: 4,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 16,
+                                crossAxisSpacing: 8,
+                                mainAxisSpacing: 12,
+                                childAspectRatio: 68 / 88,
                                 children: [
-                                  _buildCategoryItem('Analizlenim', Colors.pink, Icons.analytics),
-                                  _buildCategoryItem('Kedim', Colors.indigo, Icons.pets),
-                                  _buildCategoryItem('Aracım', Colors.blue, Icons.car_rental),
-                                  _buildCategoryItem('Bilgisayarım', Colors.grey, Icons.computer),
-                                  _buildCategoryItem('Analizlenim', Colors.pink, Icons.analytics),
-                                  _buildCategoryItem('Kedim', Colors.indigo, Icons.pets),
-                                  _buildCategoryItem('Aracım', Colors.blue, Icons.car_rental),
-                                  _buildCategoryItem('Bilgisayarım', Colors.grey, Icons.computer),
+                                  _buildTag('Anahtarım', 'assets/kartlar/iskartim.png'),
+                                  _buildTag('Kedim', 'assets/kartlar/dronepilot.png'),
+                                  _buildTag('Aracım', 'assets/kartlar/webdev.png'),
+                                  _buildTag('Bilgisayarım', 'assets/kartlar/iskartim4.png'),
+                                  _buildTag('Anahtarım', 'assets/kartlar/iskartim.png'),
+                                  _buildTag('Kedim', 'assets/kartlar/dronepilot.png'),
+                                  _buildTag('Aracım', 'assets/kartlar/webdev.png'),
+                                  _buildTag('Bilgisayarım', 'assets/kartlar/iskartim4.png'),
                                 ],
                               ),
                               const SizedBox(height: 80),
@@ -868,54 +456,221 @@ class HomeScreen extends StatelessWidget {
     );
   }
   
-  Widget _buildCategoryItem(String title, Color color, IconData icon) {
-    return Column(
-      children: [
-        Container(
-          width: 45,
-          height: 45,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: color.withOpacity(0.3),
-                blurRadius: 6,
-                offset: const Offset(0, 3),
-              ),
-            ],
+  Widget _buildCard({
+    required String title,
+    String? imagePath,
+    required bool isOnline,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFF3F4F6), // A solid, light grey like in the reference image
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                if (imagePath != null)
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        imagePath,
+                        fit: BoxFit.cover,
+                        filterQuality: FilterQuality.high,
+                      ),
+                    ),
+                  ),
+                Positioned(
+                  top: 12,
+                  right: 12,
+                  child: Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: isOnline ? const Color(0xFF78BE20) : Colors.grey.shade400,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF374151), // Dark gray for better readability
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                SizedBox(
+                  width: 36,
+                  height: 12,
+                  child: Stack(
+                    children: List.generate(4, (index) {
+                      final images = [
+                        'assets/kartlar/iskartim.png',
+                        'assets/kartlar/webdev.png',
+                        'assets/kartlar/dronepilot.png',
+                        'assets/kartlar/iskartim4.png'
+                      ];
+                      return Positioned(
+                        left: (index * 6).toDouble(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: const Color(0xFFF3F4F6), width: 1), // Border matches card background
+                          ),
+                          child: ClipOval(
+                            child: Image.asset(
+                              images[index],
+                              width: 12,
+                              height: 12,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.high,
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildTag(String title, String imagePath) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 68,
+          height: 72,
           child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
             children: [
-              Center(
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 20,
+              // 1. Arka plan halkası
+              Container(
+                width: 70,
+                height: 70,
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 227, 226, 226),
+                  shape: BoxShape.circle,
                 ),
               ),
+              
+              // 2. Ana görsel
+              ClipOval(
+                child: Image.asset(
+                  imagePath,
+                  width: 58,
+                  height: 58,
+                  fit: BoxFit.cover,
+                ),
+              ),
+
+              // 3. Alttaki iç içe geçmiş avatarlar
               Positioned(
-                top: 3,
-                right: 3,
+                bottom: 4,
                 child: Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF78BE20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8), // Gölgelendirilecek alanın şekli
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.12),
+                        blurRadius: 2,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    width: 36,
+                    height: 12,
+                    child: Stack(
+                      children: List.generate(4, (index) {
+                        final images = [
+                          'assets/kartlar/iskartim.png',
+                          'assets/kartlar/webdev.png',
+                          'assets/kartlar/dronepilot.png',
+                          'assets/kartlar/iskartim4.png'
+                        ];
+                        return Positioned(
+                          left: (index * 6).toDouble(),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 1),
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                images[index],
+                                width: 12,
+                                height: 12,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                ),
+              ),
+
+              // 4. Sağ üstteki yeşil durum noktası
+              Positioned(
+                top: 1,
+                right: 1,
+                child: Container(
+                  width: 14,
+                  height: 14,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF78BE20),
                     shape: BoxShape.circle,
+                    border: Border.all(color: Colors.white, width: 1.5),
                   ),
                 ),
               ),
             ],
           ),
         ),
+        
         const SizedBox(height: 6),
+        
+        // Etiket Adı
         Text(
           title,
           style: const TextStyle(
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: FontWeight.w500,
-            color: Colors.black87,
+            color: Colors.black54,
           ),
           textAlign: TextAlign.center,
           maxLines: 1,
@@ -925,5 +680,52 @@ class HomeScreen extends StatelessWidget {
     );
   }
   
+  Widget _buildPositionedAvatar(
+    String imagePath, {
+    required double size,
+    required double angle,
+    required double distance,
+    bool isBW = false,
+  }) {
+    final double angleInRadians = angle * (math.pi / 180);
+    // Stack'in merkezi 100,100 olduğu için (200x200)
+    final double top = 100 - (distance * math.sin(angleInRadians)) - (size / 2);
+    final double left = 100 + (distance * math.cos(angleInRadians)) - (size / 2);
 
+    Widget avatar = Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.white, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 4,
+          ),
+        ],
+      ),
+      child: ClipOval(
+        child: Image.asset(imagePath, fit: BoxFit.cover),
+      ),
+    );
+
+    if (isBW) {
+      avatar = ColorFiltered(
+        colorFilter: const ColorFilter.matrix([
+          0.2126, 0.7152, 0.0722, 0, 0,
+          0.2126, 0.7152, 0.0722, 0, 0,
+          0.2126, 0.7152, 0.0722, 0, 0,
+          0,      0,      0,      1, 0,
+        ]),
+        child: avatar,
+      );
+    }
+
+    return Positioned(
+      top: top,
+      left: left,
+      child: avatar,
+    );
+  }
 } 
