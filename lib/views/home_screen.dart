@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/home_viewmodel.dart';
+import '../widgets/bottom_navigation_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final bool isMainScreen;
+  
+  const HomeScreen({super.key, this.isMainScreen = false});
 
   @override
   Widget build(BuildContext context) {
@@ -846,69 +849,14 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       
-                      // Alt navigasyon bar
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 8,
-                              offset: const Offset(0, -2),
-                            ),
-                          ],
+                      // Alt navigasyon bar (sadece ana ekran değilse göster)
+                      if (!isMainScreen)
+                        BottomNavigationWidget(
+                          currentIndex: 0,
+                          onTabChanged: (int index) {
+                            // Standalone sayfada bu kullanılmayacak
+                          },
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _buildNavItem(Icons.home, true),
-                            _buildNavItem(Icons.credit_card, false),
-                            _buildNavItem(Icons.person, false),
-                            // Mesaj ikonu badge ile
-                            Stack(
-                              children: [
-                                _buildNavItem(Icons.chat_bubble_outline, false),
-                                Positioned(
-                                  top: 0,
-                                  right: 0,
-                                  child: Container(
-                                    width: 14,
-                                    height: 14,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFF78BE20),
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Center(
-                                      child: Text(
-                                        '1',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              width: 32,
-                              height: 32,
-                              decoration: const BoxDecoration(
-                                color: Color(0xFF78BE20),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -977,14 +925,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
   
-  Widget _buildNavItem(IconData icon, bool isSelected) {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      child: Icon(
-        icon,
-        color: isSelected ? const Color(0xFF78BE20) : Colors.grey,
-        size: 20,
-      ),
-    );
-  }
+
 } 

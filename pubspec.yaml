@@ -64,6 +64,7 @@ flutter:
     - assets/Giriş Yap – 1.png
     - assets/Group 8698.png
     - assets/bg-home/image.png
+    - assets/kartlar/
   #   - images/a_dot_burr.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

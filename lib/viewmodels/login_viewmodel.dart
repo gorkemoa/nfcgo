@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/user_model.dart';
 import '../services/auth_service.dart';
 import '../views/register_screen.dart';
-import '../views/home_screen.dart';
+import '../views/main_screen.dart';
 
 class LoginViewModel extends ChangeNotifier {
   // Servisler
@@ -84,10 +84,10 @@ class LoginViewModel extends ChangeNotifier {
     );
   }
   
-  // Home screen'e yönlendir
+  // Main screen'e yönlendir
   void navigateToHome(BuildContext context) {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => const MainScreen()),
     );
   }
   
